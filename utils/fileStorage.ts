@@ -1,5 +1,4 @@
 import * as FileSystem from 'expo-file-system';
-import { Platform } from 'react-native';
 import { VaultFile } from '../types/vault';
 
 // Get the app's internal storage directory
