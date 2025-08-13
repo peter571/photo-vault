@@ -16,6 +16,7 @@ export default function Index() {
         Alert.alert('Error', 'Failed to setup PIN');
       }
     } catch (error) {
+      console.log('error', error);
       Alert.alert('Error', 'Failed to setup PIN');
     }
   };
@@ -30,6 +31,7 @@ export default function Index() {
         Alert.alert('Error', 'Incorrect PIN');
       }
     } catch (error) {
+      console.log('error', error);
       Alert.alert('Error', 'Authentication failed');
     }
   };

@@ -104,9 +104,9 @@ export default function SettingsScreen() {
       <SafeAreaView className="flex-1 bg-background">
         <View className="flex-row items-center justify-between border-b border-border p-4">
           <TouchableOpacity onPress={() => setShowPinChange(false)} className="p-2">
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            <MaterialIcons name="arrow-back" size={28} color="#6b7280" />
           </TouchableOpacity>
-          <Text className="font-medium text-foreground">Change PIN</Text>
+          <Text className="text-lg font-medium text-foreground">Change PIN</Text>
           <View className="w-10" />
         </View>
         <PinSetup onPinSet={handlePinChange} isInitialSetup={true} />
@@ -119,9 +119,9 @@ export default function SettingsScreen() {
       {/* Header */}
       <View className="flex-row items-center justify-between border-b border-border p-4">
         <TouchableOpacity onPress={() => router.back()} className="p-2">
-          <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+          <MaterialIcons name="arrow-back" size={28} color="#6b7280" />
         </TouchableOpacity>
-        <Text className="font-medium text-foreground">Settings</Text>
+        <Text className="text-lg font-medium text-foreground">Settings</Text>
         <View className="w-10" />
       </View>
 
@@ -136,11 +136,11 @@ export default function SettingsScreen() {
               className="flex-row items-center justify-between rounded-lg border border-border bg-card p-4">
               <View className="flex-1 flex-row items-center">
                 <View className="mr-3 h-10 w-10 items-center justify-center rounded-lg bg-muted">
-                  <MaterialIcons name={item.icon as any} size={20} color="#6b7280" />
+                  <MaterialIcons name={item.icon as any} size={22} color="#6b7280" />
                 </View>
                 <View className="flex-1">
-                  <Text className="font-medium text-foreground">{item.title}</Text>
-                  <Text className="text-sm text-muted-foreground">{item.subtitle}</Text>
+                  <Text className="text-lg font-medium text-foreground">{item.title}</Text>
+                  <Text className="text-base text-muted-foreground">{item.subtitle}</Text>
                 </View>
               </View>
 
@@ -152,7 +152,7 @@ export default function SettingsScreen() {
                   thumbColor={item.value ? '#ffffff' : '#f3f4f6'}
                 />
               ) : (
-                <MaterialIcons name="chevron-right" size={20} color="#6b7280" />
+                <MaterialIcons name="chevron-right" size={22} color="#6b7280" />
               )}
             </TouchableOpacity>
           ))}
@@ -160,21 +160,21 @@ export default function SettingsScreen() {
 
         {/* Danger Zone */}
         <View className="gap-2 p-4">
-          <Text className="text-lg font-medium text-foreground">Danger Zone</Text>
+          <Text className="text-xl font-medium text-foreground">Danger Zone</Text>
 
           <TouchableOpacity
             onPress={handlePinRemove}
             className="flex-row items-center justify-between rounded-lg border border-red-200 bg-red-50 p-4">
             <View className="flex-1 flex-row items-center">
               <View className="mr-3 h-10 w-10 items-center justify-center rounded-lg bg-red-100">
-                <MaterialIcons name="lock-open" size={20} color="#dc2626" />
+                <MaterialIcons name="lock-open" size={22} color="#dc2626" />
               </View>
               <View className="flex-1">
-                <Text className="font-medium text-red-600">Remove PIN</Text>
-                <Text className="text-sm text-red-500">Make vault less secure</Text>
+                <Text className="text-lg font-medium text-red-600">Remove PIN</Text>
+                <Text className="text-base text-red-500">Make vault less secure</Text>
               </View>
             </View>
-            <MaterialIcons name="chevron-right" size={20} color="#dc2626" />
+            <MaterialIcons name="chevron-right" size={22} color="#dc2626" />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -182,14 +182,14 @@ export default function SettingsScreen() {
             className="flex-row items-center justify-between rounded-lg border border-red-200 bg-red-50 p-4">
             <View className="flex-1 flex-row items-center">
               <View className="mr-3 h-10 w-10 items-center justify-center rounded-lg bg-red-100">
-                <MaterialIcons name="logout" size={20} color="#dc2626" />
+                <MaterialIcons name="logout" size={22} color="#dc2626" />
               </View>
               <View className="flex-1">
-                <Text className="font-medium text-red-600">Logout</Text>
-                <Text className="text-sm text-red-500">Sign out of vault</Text>
+                <Text className="text-lg font-medium text-red-600">Logout</Text>
+                <Text className="text-base text-red-500">Sign out of vault</Text>
               </View>
             </View>
-            <MaterialIcons name="chevron-right" size={20} color="#dc2626" />
+            <MaterialIcons name="chevron-right" size={22} color="#dc2626" />
           </TouchableOpacity>
         </View>
       </ScrollView>

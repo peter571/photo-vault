@@ -43,10 +43,11 @@ export function CategoryTabs({ activeCategory, onCategoryChange, fileCounts }: C
               }`}>
               <MaterialIcons
                 name={category.icon as any}
-                size={16}
+                size={18}
                 color={isActive ? 'white' : '#374151'}
               />
-              <Text className={`ml-2 ${isActive ? 'text-primary-foreground' : 'text-foreground'}`}>
+              <Text
+                className={`ml-2 text-base ${isActive ? 'text-primary-foreground' : 'text-foreground'}`}>
                 {category.label}
               </Text>
               {count > 0 && (

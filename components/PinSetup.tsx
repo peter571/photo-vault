@@ -85,7 +85,7 @@ export function PinSetup({ onPinSet, isInitialSetup, existingPin }: PinSetupProp
 
     return (
       <View className="gap-2 space-y-4">
-        <Text className="text-center text-sm text-muted-foreground">{placeholder}</Text>
+        <Text className="text-center text-base text-muted-foreground">{placeholder}</Text>
         <TextInput
           ref={ref}
           value={value}
@@ -101,7 +101,7 @@ export function PinSetup({ onPinSet, isInitialSetup, existingPin }: PinSetupProp
                 : `Enter PIN (${MIN_PIN_LENGTH}-${MAX_PIN_LENGTH} characters)`
           }
           placeholderTextColor="#6b7280"
-          className="rounded-lg border border-border bg-background px-4 py-3 text-center text-lg font-medium text-foreground"
+          className="rounded-lg border border-border bg-background px-4 py-3 text-center text-xl font-medium text-foreground"
           autoComplete="off"
           autoCorrect={false}
           autoCapitalize="none"
@@ -111,10 +111,12 @@ export function PinSetup({ onPinSet, isInitialSetup, existingPin }: PinSetupProp
           className="my-2 flex-row items-center justify-center gap-2 space-x-2">
           <MaterialIcons
             name={showPin ? 'visibility-off' : 'visibility'}
-            size={20}
+            size={22}
             color="#6b7280"
           />
-          <Text className="text-sm text-muted-foreground">{showPin ? 'Hide PIN' : 'Show PIN'}</Text>
+          <Text className="text-base text-muted-foreground">
+            {showPin ? 'Hide PIN' : 'Show PIN'}
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -133,13 +135,13 @@ export function PinSetup({ onPinSet, isInitialSetup, existingPin }: PinSetupProp
         {/* Header */}
         <View className="items-center space-y-4">
           <View className="h-16 w-16 items-center justify-center rounded-full bg-primary">
-            <MaterialIcons name="security" size={32} color="white" />
+            <MaterialIcons name="security" size={36} color="white" />
           </View>
           <View className="items-center">
-            <Text className="text-2xl font-bold text-foreground">
+            <Text className="text-3xl font-bold text-foreground">
               {isInitialSetup ? 'Set Up PIN' : 'Enter PIN'}
             </Text>
-            <Text className="mt-2 text-center text-muted-foreground">
+            <Text className="mt-2 text-center text-lg text-muted-foreground">
               {isInitialSetup
                 ? `Create a PIN (${MIN_PIN_LENGTH}-${MAX_PIN_LENGTH} characters) to secure your vault`
                 : 'Enter your PIN to access the vault'}
@@ -168,7 +170,7 @@ export function PinSetup({ onPinSet, isInitialSetup, existingPin }: PinSetupProp
             isPinValid && (!showConfirm || isConfirmValid) ? 'bg-primary' : 'bg-muted'
           }`}>
           <Text
-            className={`font-medium ${
+            className={`text-lg font-medium ${
               isPinValid && (!showConfirm || isConfirmValid)
                 ? 'text-primary-foreground'
                 : 'text-muted-foreground'

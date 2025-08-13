@@ -25,7 +25,7 @@ export function Badge({ children, variant = 'default', className = '' }: BadgePr
   return (
     <View
       className={`inline-flex items-center justify-center rounded-md border px-1.5 py-0.5 ${badgeVariants[variant]} ${className}`}>
-      <Text className={`text-xs font-medium ${textVariants[variant]}`}>{children}</Text>
+      <Text className={`text-sm font-medium ${textVariants[variant]}`}>{children}</Text>
     </View>
   );
 }

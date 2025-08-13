@@ -22,7 +22,7 @@ export default function VaultScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFile, setSelectedFile] = useState<VaultFile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { lockApp, isAppLocked, isInitialized } = useAuthState();
+  const { lockApp } = useAuthState();
 
   useEffect(() => {
     loadFiles();
@@ -121,17 +121,19 @@ export default function VaultScreen() {
         {/* Empty State */}
         {filteredFiles.length === 0 && files.length > 0 && (
           <View className="items-center py-12">
-            <Text className="text-muted-foreground">No files found matching your criteria</Text>
+            <Text className="text-lg text-muted-foreground">
+              No files found matching your criteria
+            </Text>
           </View>
         )}
 
         {files.length === 0 && (
           <View className="items-center py-12">
-            <MaterialIcons name="security" size={48} color="#6b7280" />
-            <Text className="mb-2 mt-4 text-lg font-medium text-foreground">
+            <MaterialIcons name="security" size={56} color="#6b7280" />
+            <Text className="mb-2 mt-4 text-xl font-medium text-foreground">
               Your vault is empty
             </Text>
-            <Text className="text-center text-muted-foreground">
+            <Text className="text-center text-lg text-muted-foreground">
               Upload your first document, image, or audio file to get started
             </Text>
           </View>
@@ -147,22 +149,21 @@ export default function VaultScreen() {
         <View className="flex-row items-center justify-between">
           <View className="flex-row items-center gap-2">
             <View className="h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <MaterialIcons name="security" size={16} color="white" />
+              <MaterialIcons name="security" size={18} color="white" />
             </View>
-            <Text className="font-medium text-foreground">Vault</Text>
+            <Text className="text-lg font-medium text-foreground">Vault</Text>
           </View>
           <View className="flex-row items-center gap-2">
             <View className="flex-row items-center gap-1">
-              <MaterialIcons name="lock" size={16} color="#6b7280" />
-              <Text className="text-sm text-muted-foreground">Secured</Text>
+              <Text className="text-base text-muted-foreground">Secured</Text>
             </View>
             <TouchableOpacity onPress={lockApp} className="h-8 w-8 items-center justify-center">
-              <MaterialIcons name="lock" size={16} color="#6b7280" />
+              <MaterialIcons name="lock" size={18} color="#6b7280" />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => router.push('/(protected)/settings')}
               className="h-8 w-8 items-center justify-center">
-              <MaterialIcons name="settings" size={16} color="#6b7280" />
+              <MaterialIcons name="settings" size={18} color="#6b7280" />
             </TouchableOpacity>
           </View>
         </View>
@@ -171,8 +172,8 @@ export default function VaultScreen() {
       {/* Main Content */}
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <MaterialIcons name="security" size={48} color="#6366f1" />
-          <Text className="mt-4 text-lg font-medium text-foreground">Loading Vault...</Text>
+          <MaterialIcons name="security" size={56} color="#6366f1" />
+          <Text className="mt-4 text-xl font-medium text-foreground">Loading Vault...</Text>
         </View>
       ) : (
         <FlatList

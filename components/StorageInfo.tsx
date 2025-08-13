@@ -59,23 +59,23 @@ export function StorageInfo({ files }: StorageInfoProps) {
     <View className="my-4 rounded-lg border border-border bg-card p-4">
       <View className="flex-row items-center justify-between">
         <View className="flex-row items-center gap-2">
-          <MaterialIcons name="storage" size={16} color="#6b7280" />
-          <Text className="text-sm font-medium text-foreground">Vault Storage</Text>
+          <MaterialIcons name="storage" size={18} color="#6b7280" />
+          <Text className="text-base font-medium text-foreground">Vault Storage</Text>
         </View>
         <TouchableOpacity onPress={calculateStorageInfo}>
-          <MaterialIcons name="refresh" size={16} color="#6b7280" />
+          <MaterialIcons name="refresh" size={18} color="#6b7280" />
         </TouchableOpacity>
       </View>
 
       <View className="mt-3 space-y-2">
         <View className="flex-row justify-between">
-          <Text className="text-sm text-muted-foreground">Files</Text>
-          <Text className="text-sm font-medium text-foreground">{storageInfo.fileCount}</Text>
+          <Text className="text-base text-muted-foreground">Files</Text>
+          <Text className="text-base font-medium text-foreground">{storageInfo.fileCount}</Text>
         </View>
 
         <View className="flex-row justify-between">
-          <Text className="text-sm text-muted-foreground">Total Size</Text>
-          <Text className="text-sm font-medium text-foreground">
+          <Text className="text-base text-muted-foreground">Total Size</Text>
+          <Text className="text-base font-medium text-foreground">
             {formatFileSize(storageInfo.totalSize)}
           </Text>
         </View>

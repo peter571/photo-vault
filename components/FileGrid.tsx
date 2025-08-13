@@ -79,12 +79,12 @@ export function FileGrid({ files, onFileClick, onFileDelete }: FileGridProps) {
           <View className="flex-1 items-center justify-center space-y-2">
             {/* File Icon */}
             <View className="h-12 w-12 items-center justify-center rounded-lg bg-muted">
-              <MaterialIcons name={getFileIcon(item.type) as any} size={24} color="#6b7280" />
+              <MaterialIcons name={getFileIcon(item.type) as any} size={28} color="#6b7280" />
             </View>
 
             {/* File Name */}
             <Text
-              className="text-center text-sm font-medium text-foreground"
+              className="text-center text-base font-medium text-foreground"
               numberOfLines={2}
               ellipsizeMode="tail">
               {item.name}
@@ -92,15 +92,15 @@ export function FileGrid({ files, onFileClick, onFileDelete }: FileGridProps) {
 
             {/* File Info */}
             <View className="items-center space-y-1">
-              <Text className="text-xs text-muted-foreground">{formatFileSize(item.size)}</Text>
-              <Text className="text-xs text-muted-foreground">{formatDate(item.uploadDate)}</Text>
+              <Text className="text-sm text-muted-foreground">{formatFileSize(item.size)}</Text>
+              <Text className="text-sm text-muted-foreground">{formatDate(item.uploadDate)}</Text>
             </View>
 
             {/* Delete Button */}
             <TouchableOpacity
               onPress={() => handleDelete(item)}
               className="absolute right-2 top-2 h-6 w-6 items-center justify-center rounded-full bg-destructive">
-              <MaterialIcons name="close" size={14} color="white" />
+              <MaterialIcons name="close" size={16} color="white" />
             </TouchableOpacity>
           </View>
         </TouchableOpacity>

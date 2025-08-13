@@ -45,6 +45,7 @@ export function FileUpload({ onFileUpload }: FileUploadProps) {
         }
       }
     } catch (error) {
+      console.log('error', error);
       Alert.alert('Error', 'Failed to pick documents');
     } finally {
       setIsLoading(false);
@@ -105,6 +106,7 @@ export function FileUpload({ onFileUpload }: FileUploadProps) {
         }
       }
     } catch (error) {
+      console.log('error', error);
       Alert.alert('Error', 'Failed to pick images or videos');
     } finally {
       setIsLoading(false);
@@ -153,6 +155,7 @@ export function FileUpload({ onFileUpload }: FileUploadProps) {
         }
       }
     } catch (error) {
+      console.log('error', error);
       Alert.alert('Error', 'Failed to capture photo or video');
     } finally {
       setIsLoading(false);
@@ -165,16 +168,16 @@ export function FileUpload({ onFileUpload }: FileUploadProps) {
         <View className="h-12 w-12 items-center justify-center rounded-full bg-muted">
           <MaterialIcons
             name={isLoading ? 'hourglass-empty' : 'cloud-upload'}
-            size={24}
+            size={28}
             color="#6b7280"
           />
         </View>
 
         <View className="my-2 items-center">
-          <Text className="mb-1 font-semibold text-foreground">
+          <Text className="mb-1 text-lg font-semibold text-foreground">
             {isLoading ? 'Uploading...' : 'Upload files'}
           </Text>
-          <Text className="text-center text-sm text-muted-foreground">
+          <Text className="text-center text-base text-muted-foreground">
             Tap to select files from your device
           </Text>
         </View>
@@ -184,24 +187,24 @@ export function FileUpload({ onFileUpload }: FileUploadProps) {
             onPress={handleCameraCapture}
             disabled={isLoading}
             className="flex-row items-center rounded-lg bg-primary px-3 py-2">
-            <MaterialIcons name="camera-alt" size={16} color="white" />
-            <Text className="ml-1 text-sm text-primary-foreground">Camera</Text>
+            <MaterialIcons name="camera-alt" size={18} color="white" />
+            <Text className="ml-1 text-base text-primary-foreground">Camera</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => handleImagePicker('library')}
             disabled={isLoading}
             className="flex-row items-center rounded-lg bg-secondary px-3 py-2">
-            <MaterialIcons name="photo-library" size={16} color="#374151" />
-            <Text className="ml-1 text-sm text-secondary-foreground">Library</Text>
+            <MaterialIcons name="photo-library" size={18} color="#374151" />
+            <Text className="ml-1 text-base text-secondary-foreground">Library</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={handleDocumentPicker}
             disabled={isLoading}
             className="flex-row items-center rounded-lg bg-secondary px-3 py-2">
-            <MaterialIcons name="description" size={16} color="#374151" />
-            <Text className="ml-1 text-sm text-secondary-foreground">Documents</Text>
+            <MaterialIcons name="description" size={18} color="#374151" />
+            <Text className="ml-1 text-base text-secondary-foreground">Documents</Text>
           </TouchableOpacity>
         </View>
       </View>

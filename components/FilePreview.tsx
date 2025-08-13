@@ -117,7 +117,7 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
       <View className="flex-1 items-center justify-center">
         {!isVideoReady && (
           <View className="mb-4 items-center">
-            <Text className="text-muted-foreground">Loading video player...</Text>
+            <Text className="text-lg text-muted-foreground">Loading video player...</Text>
           </View>
         )}
 
@@ -134,19 +134,19 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
           <TouchableOpacity
             onPress={handleVideoReplay}
             className="h-12 w-12 items-center justify-center rounded-full bg-primary">
-            <MaterialIcons name="replay" size={24} color="white" />
+            <MaterialIcons name="replay" size={28} color="white" />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={videoIsPlaying ? handleVideoPause : handleVideoPlay}
             className="h-16 w-16 items-center justify-center rounded-full bg-primary">
-            <MaterialIcons name={videoIsPlaying ? 'pause' : 'play-arrow'} size={32} color="white" />
+            <MaterialIcons name={videoIsPlaying ? 'pause' : 'play-arrow'} size={36} color="white" />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={handleVideoStop}
             className="h-12 w-12 items-center justify-center rounded-full bg-primary">
-            <MaterialIcons name="stop" size={24} color="white" />
+            <MaterialIcons name="stop" size={28} color="white" />
           </TouchableOpacity>
         </View>
 
@@ -154,8 +154,10 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
         {videoDuration > 0 && (
           <View className="mt-4 w-full px-4">
             <View className="flex-row justify-between">
-              <Text className="text-sm text-muted-foreground">{formatTime(videoCurrentTime)}</Text>
-              <Text className="text-sm text-muted-foreground">{formatTime(videoDuration)}</Text>
+              <Text className="text-base text-muted-foreground">
+                {formatTime(videoCurrentTime)}
+              </Text>
+              <Text className="text-base text-muted-foreground">{formatTime(videoDuration)}</Text>
             </View>
             <View className="h-2 w-full rounded-full bg-muted">
               <View
@@ -176,7 +178,7 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
       <View className="flex-1 items-center justify-center p-6">
         {!isAudioReady && (
           <View className="mb-4 items-center">
-            <Text className="text-muted-foreground">Loading audio player...</Text>
+            <Text className="text-lg text-muted-foreground">Loading audio player...</Text>
           </View>
         )}
 
@@ -184,21 +186,21 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
         <View className="mb-8 h-32 w-32 items-center justify-center rounded-full bg-primary/10">
           <MaterialIcons
             name={audioStatus?.playing ? 'music-note' : 'music-off'}
-            size={64}
+            size={72}
             color="#3b82f6"
           />
         </View>
 
-        <Text className="mb-4 text-center text-xl font-semibold text-foreground">{file.name}</Text>
+        <Text className="mb-4 text-center text-2xl font-semibold text-foreground">{file.name}</Text>
 
         {/* Audio Progress */}
         {audioStatus && (
           <View className="mb-6 w-full px-4">
             <View className="mb-2 flex-row justify-between">
-              <Text className="text-sm text-muted-foreground">
+              <Text className="text-base text-muted-foreground">
                 {formatTime(audioStatus.currentTime || 0)}
               </Text>
-              <Text className="text-sm text-muted-foreground">
+              <Text className="text-base text-muted-foreground">
                 {formatTime(audioStatus.duration || 0)}
               </Text>
             </View>
@@ -218,7 +220,7 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
           <TouchableOpacity
             onPress={handleAudioReplay}
             className="h-12 w-12 items-center justify-center rounded-full bg-muted">
-            <MaterialIcons name="replay" size={24} color="#6b7280" />
+            <MaterialIcons name="replay" size={28} color="#6b7280" />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -232,7 +234,7 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
             className="h-16 w-16 items-center justify-center rounded-full bg-primary">
             <MaterialIcons
               name={audioStatus?.playing ? 'pause' : 'play-arrow'}
-              size={32}
+              size={36}
               color="white"
             />
           </TouchableOpacity>
@@ -240,7 +242,7 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
           <TouchableOpacity
             onPress={handleAudioStop}
             className="h-12 w-12 items-center justify-center rounded-full bg-muted">
-            <MaterialIcons name="stop" size={24} color="#6b7280" />
+            <MaterialIcons name="stop" size={28} color="#6b7280" />
           </TouchableOpacity>
         </View>
       </View>
@@ -277,12 +279,12 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
           return (
             <View className="flex-1 items-center justify-center p-6">
               <View className="mb-4 h-24 w-24 items-center justify-center rounded-full bg-red-100">
-                <MaterialIcons name="error" size={48} color="#ef4444" />
+                <MaterialIcons name="error" size={52} color="#ef4444" />
               </View>
-              <Text className="mb-2 text-center text-lg font-medium text-foreground">
+              <Text className="mb-2 text-center text-xl font-medium text-foreground">
                 Invalid PDF File
               </Text>
-              <Text className="text-center text-muted-foreground">
+              <Text className="text-center text-lg text-muted-foreground">
                 The PDF file URI is invalid or empty
               </Text>
             </View>
@@ -297,12 +299,12 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
           return (
             <View className="flex-1 items-center justify-center p-6">
               <View className="mb-4 h-24 w-24 items-center justify-center rounded-full bg-yellow-100">
-                <MaterialIcons name="description" size={48} color="#f59e0b" />
+                <MaterialIcons name="description" size={52} color="#f59e0b" />
               </View>
-              <Text className="mb-2 text-center text-lg font-medium text-foreground">
+              <Text className="mb-2 text-center text-xl font-medium text-foreground">
                 Not a PDF File
               </Text>
-              <Text className="text-center text-muted-foreground">
+              <Text className="text-center text-lg text-muted-foreground">
                 This document is not in PDF format and cannot be previewed
               </Text>
             </View>
@@ -345,12 +347,12 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
         return (
           <View className="flex-1 items-center justify-center p-6">
             <View className="mb-4 h-24 w-24 items-center justify-center rounded-full bg-muted">
-              <MaterialIcons name="insert-drive-file" size={48} color="#6b7280" />
+              <MaterialIcons name="insert-drive-file" size={52} color="#6b7280" />
             </View>
-            <Text className="mb-2 text-center text-lg font-medium text-foreground">
+            <Text className="mb-2 text-center text-xl font-medium text-foreground">
               {file.name}
             </Text>
-            <Text className="text-center text-muted-foreground">
+            <Text className="text-center text-lg text-muted-foreground">
               This file type cannot be previewed directly
             </Text>
           </View>
@@ -466,16 +468,18 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
         {/* Header */}
         <View className="flex-row items-center justify-between border-b border-border p-4">
           <TouchableOpacity onPress={onClose} className="p-2">
-            <MaterialIcons name="close" size={24} color="#6b7280" />
+            <MaterialIcons name="close" size={28} color="#6b7280" />
           </TouchableOpacity>
 
-          <Text className="mx-4 flex-1 text-center font-medium text-foreground" numberOfLines={1}>
+          <Text
+            className="mx-4 flex-1 text-center text-lg font-medium text-foreground"
+            numberOfLines={1}>
             {file.name}
           </Text>
 
           <View className="flex-row space-x-2">
             <TouchableOpacity onPress={handleDelete} className="p-2">
-              <MaterialIcons name="delete" size={24} color="#ef4444" />
+              <MaterialIcons name="delete" size={28} color="#ef4444" />
             </TouchableOpacity>
           </View>
         </View>
@@ -487,20 +491,20 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
         <View className="border-t border-border bg-card p-4">
           <View className="space-y-2">
             <View className="flex-row justify-between">
-              <Text className="text-muted-foreground">Type</Text>
-              <Text className="capitalize text-foreground">{file.type}</Text>
+              <Text className="text-base text-muted-foreground">Type</Text>
+              <Text className="text-base capitalize text-foreground">{file.type}</Text>
             </View>
             <View className="flex-row justify-between">
-              <Text className="text-muted-foreground">Size</Text>
-              <Text className="text-foreground">{formatFileSize(file.size)}</Text>
+              <Text className="text-base text-muted-foreground">Size</Text>
+              <Text className="text-base text-foreground">{formatFileSize(file.size)}</Text>
             </View>
             <View className="flex-row justify-between">
-              <Text className="text-muted-foreground">Added</Text>
-              <Text className="text-foreground">{formatDate(file.uploadDate)}</Text>
+              <Text className="text-base text-muted-foreground">Added</Text>
+              <Text className="text-base text-foreground">{formatDate(file.uploadDate)}</Text>
             </View>
             <View className="flex-row justify-between">
-              <Text className="text-muted-foreground">MIME Type</Text>
-              <Text className="text-xs text-foreground">{file.mimeType}</Text>
+              <Text className="text-base text-muted-foreground">MIME Type</Text>
+              <Text className="text-sm text-foreground">{file.mimeType}</Text>
             </View>
           </View>
         </View>
