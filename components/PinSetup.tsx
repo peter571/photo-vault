@@ -74,7 +74,8 @@ export function PinSetup({ onPinSet, isInitialSetup, existingPin }: PinSetupProp
     showPin: boolean,
     setShowPin: (show: boolean) => void,
     placeholder: string,
-    ref?: any
+    ref?: any,
+    isConfirmMode?: boolean
   ) => {
     const handleChangeText = (text: string) => {
       if (text.length <= MAX_PIN_LENGTH) {
@@ -92,9 +93,18 @@ export function PinSetup({ onPinSet, isInitialSetup, existingPin }: PinSetupProp
           onKeyPress={handleKeyPress}
           maxLength={MAX_PIN_LENGTH}
           secureTextEntry={!showPin}
-          placeholder={`Enter PIN (${MIN_PIN_LENGTH}-${MAX_PIN_LENGTH} characters)`}
+          placeholder={
+            isConfirmMode
+              ? `Confirm PIN (${MIN_PIN_LENGTH}-${MAX_PIN_LENGTH} characters)`
+              : isInitialSetup
+                ? `Create PIN (${MIN_PIN_LENGTH}-${MAX_PIN_LENGTH} characters)`
+                : `Enter PIN (${MIN_PIN_LENGTH}-${MAX_PIN_LENGTH} characters)`
+          }
+          placeholderTextColor="#6b7280"
           className="rounded-lg border border-border bg-background px-4 py-3 text-center text-lg font-medium text-foreground"
-          autoFocus={!showConfirm}
+          autoComplete="off"
+          autoCorrect={false}
+          autoCapitalize="none"
         />
         <TouchableOpacity
           onPress={() => setShowPin(!showPin)}
@@ -139,14 +149,15 @@ export function PinSetup({ onPinSet, isInitialSetup, existingPin }: PinSetupProp
 
         {/* PIN Input */}
         {!showConfirm
-          ? renderPinInput(pin, setPin, showPin, setShowPin, 'Enter your PIN', pinInputRef)
+          ? renderPinInput(pin, setPin, showPin, setShowPin, 'Enter your PIN', pinInputRef, false)
           : renderPinInput(
               confirmPin,
               setConfirmPin,
               showConfirmPin,
               setShowConfirmPin,
               'Confirm your PIN',
-              confirmPinInputRef
+              confirmPinInputRef,
+              true
             )}
 
         {/* Submit Button */}

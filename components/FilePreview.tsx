@@ -3,8 +3,9 @@ import { View, Text, TouchableOpacity, Modal, ScrollView, Dimensions, Alert } fr
 import { Image } from 'expo-image';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { useEvent } from 'expo';
-import { useAudioPlayer, useAudioPlayerStatus, AudioStatus } from 'expo-audio';
+import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 import { MaterialIcons } from '@expo/vector-icons';
+import Pdf from 'react-native-pdf';
 import { VaultFile } from '../types/vault';
 
 interface FilePreviewProps {
@@ -247,6 +248,7 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
   };
 
   const renderFileContent = () => {
+    console.log('Rendering file content for:', file.type, file.uri);
     switch (file.type) {
       case 'image':
         return (
@@ -266,15 +268,84 @@ export function FilePreview({ file, onClose }: FilePreviewProps) {
       case 'audio':
         return renderAudioPlayer();
 
+      case 'document':
+        console.log('Rendering PDF with URI:', file.uri);
+        console.log('File details:', { name: file.name, size: file.size, mimeType: file.mimeType });
+
+        // Check if URI is valid
+        if (!file.uri || file.uri.trim() === '') {
+          return (
+            <View className="flex-1 items-center justify-center p-6">
+              <View className="mb-4 h-24 w-24 items-center justify-center rounded-full bg-red-100">
+                <MaterialIcons name="error" size={48} color="#ef4444" />
+              </View>
+              <Text className="mb-2 text-center text-lg font-medium text-foreground">
+                Invalid PDF File
+              </Text>
+              <Text className="text-center text-muted-foreground">
+                The PDF file URI is invalid or empty
+              </Text>
+            </View>
+          );
+        }
+
+        // Check if file is actually a PDF
+        const isPdfMimeType = file.mimeType === 'application/pdf';
+        const isPdfExtension = file.name.toLowerCase().endsWith('.pdf');
+
+        if (!isPdfMimeType && !isPdfExtension) {
+          return (
+            <View className="flex-1 items-center justify-center p-6">
+              <View className="mb-4 h-24 w-24 items-center justify-center rounded-full bg-yellow-100">
+                <MaterialIcons name="description" size={48} color="#f59e0b" />
+              </View>
+              <Text className="mb-2 text-center text-lg font-medium text-foreground">
+                Not a PDF File
+              </Text>
+              <Text className="text-center text-muted-foreground">
+                This document is not in PDF format and cannot be previewed
+              </Text>
+            </View>
+          );
+        }
+
+        return (
+          <View className="flex-1">
+            <Pdf
+              source={{ uri: file.uri, cache: true }}
+              onLoadComplete={(numberOfPages, filePath) => {
+                console.log(
+                  `PDF loaded successfully. Number of pages: ${numberOfPages}, File path: ${filePath}`
+                );
+              }}
+              onPageChanged={(page, numberOfPages) => {
+                console.log(`Current page: ${page} of ${numberOfPages}`);
+              }}
+              onError={(error) => {
+                console.log('PDF Error:', error);
+                const errorMessage =
+                  typeof error === 'object' && error !== null && 'message' in error
+                    ? (error as any).message
+                    : 'Unknown error';
+                Alert.alert('PDF Error', `Failed to load PDF: ${errorMessage}`);
+              }}
+              onPressLink={(uri) => {
+                console.log(`Link pressed: ${uri}`);
+              }}
+              style={{ flex: 1, width: width, height: height * 0.7 }}
+              enablePaging={true}
+              enableAnnotationRendering={true}
+              enableAntialiasing={true}
+              trustAllCerts={false}
+            />
+          </View>
+        );
+
       default:
         return (
           <View className="flex-1 items-center justify-center p-6">
             <View className="mb-4 h-24 w-24 items-center justify-center rounded-full bg-muted">
-              <MaterialIcons
-                name={file.type === 'document' ? 'description' : 'insert-drive-file'}
-                size={48}
-                color="#6b7280"
-              />
+              <MaterialIcons name="insert-drive-file" size={48} color="#6b7280" />
             </View>
             <Text className="mb-2 text-center text-lg font-medium text-foreground">
               {file.name}

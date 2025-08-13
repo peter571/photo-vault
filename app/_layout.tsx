@@ -16,6 +16,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
+      console.log('nextAppState', nextAppState);
       if (nextAppState === 'background' || nextAppState === 'inactive') {
         // Lock the app when it goes to background or becomes inactive
         if (isAuthenticated) {

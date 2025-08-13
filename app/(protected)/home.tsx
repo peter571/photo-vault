@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Alert, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -87,8 +87,58 @@ export default function VaultScreen() {
     }
   };
 
-  console.log('[VaultScreen] isAppLocked', isAppLocked);
-  console.log('[VaultScreen] isInitialized', isInitialized);
+  // Create a single data item for the FlatList
+  const contentData = [{ id: 'content' }];
+
+  const renderContent = () => {
+    return (
+      <View className="space-y-4">
+        {/* Search */}
+        <SearchBar value={searchQuery} onChange={setSearchQuery} />
+
+        {/* Category Tabs */}
+        <CategoryTabs
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+          fileCounts={{
+            all: files.length,
+            document: files.filter((f) => f.type === 'document').length,
+            image: files.filter((f) => f.type === 'image').length,
+            audio: files.filter((f) => f.type === 'audio').length,
+            other: files.filter((f) => f.type === 'other').length,
+          }}
+        />
+
+        {/* Storage Info */}
+        {files.length > 0 && <StorageInfo files={files} />}
+
+        {/* File Upload */}
+        <FileUpload onFileUpload={handleFileUpload} />
+
+        {/* Files Grid */}
+        <FileGrid files={filteredFiles} onFileClick={setSelectedFile} onFileDelete={deleteFile} />
+
+        {/* Empty State */}
+        {filteredFiles.length === 0 && files.length > 0 && (
+          <View className="items-center py-12">
+            <Text className="text-muted-foreground">No files found matching your criteria</Text>
+          </View>
+        )}
+
+        {files.length === 0 && (
+          <View className="items-center py-12">
+            <MaterialIcons name="security" size={48} color="#6b7280" />
+            <Text className="mb-2 mt-4 text-lg font-medium text-foreground">
+              Your vault is empty
+            </Text>
+            <Text className="text-center text-muted-foreground">
+              Upload your first document, image, or audio file to get started
+            </Text>
+          </View>
+        )}
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-background">
@@ -125,57 +175,14 @@ export default function VaultScreen() {
           <Text className="mt-4 text-lg font-medium text-foreground">Loading Vault...</Text>
         </View>
       ) : (
-        <ScrollView className="flex-1 p-4" showsVerticalScrollIndicator={false}>
-          <View className="space-y-4">
-            {/* Search */}
-            <SearchBar value={searchQuery} onChange={setSearchQuery} />
-
-            {/* Category Tabs */}
-            <CategoryTabs
-              activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
-              fileCounts={{
-                all: files.length,
-                document: files.filter((f) => f.type === 'document').length,
-                image: files.filter((f) => f.type === 'image').length,
-                audio: files.filter((f) => f.type === 'audio').length,
-                other: files.filter((f) => f.type === 'other').length,
-              }}
-            />
-
-            {/* Storage Info */}
-            {files.length > 0 && <StorageInfo files={files} />}
-
-            {/* File Upload */}
-            <FileUpload onFileUpload={handleFileUpload} />
-
-            {/* Files Grid */}
-            <FileGrid
-              files={filteredFiles}
-              onFileClick={setSelectedFile}
-              onFileDelete={deleteFile}
-            />
-
-            {/* Empty State */}
-            {filteredFiles.length === 0 && files.length > 0 && (
-              <View className="items-center py-12">
-                <Text className="text-muted-foreground">No files found matching your criteria</Text>
-              </View>
-            )}
-
-            {files.length === 0 && (
-              <View className="items-center py-12">
-                <MaterialIcons name="security" size={48} color="#6b7280" />
-                <Text className="mb-2 mt-4 text-lg font-medium text-foreground">
-                  Your vault is empty
-                </Text>
-                <Text className="text-center text-muted-foreground">
-                  Upload your first document, image, or audio file to get started
-                </Text>
-              </View>
-            )}
-          </View>
-        </ScrollView>
+        <FlatList
+          data={contentData}
+          renderItem={() => renderContent()}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ padding: 16 }}
+          removeClippedSubviews={false}
+        />
       )}
 
       {/* File Preview Modal */}

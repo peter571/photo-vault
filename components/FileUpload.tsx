@@ -75,7 +75,7 @@ export function FileUpload({ onFileUpload }: FileUploadProps) {
 
       // Launch image picker
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        mediaTypes: ['images', 'videos'],
         allowsEditing: false,
         allowsMultipleSelection: true,
         quality: 1,
@@ -124,7 +124,7 @@ export function FileUpload({ onFileUpload }: FileUploadProps) {
 
       // Launch camera
       const result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        mediaTypes: ['images', 'videos'],
         allowsEditing: false,
         quality: 1,
         aspect: [4, 3],
@@ -159,33 +159,8 @@ export function FileUpload({ onFileUpload }: FileUploadProps) {
     }
   };
 
-  const showUploadOptions = () => {
-    Alert.alert('Upload Files', 'Choose how you want to add files to your vault', [
-      {
-        text: 'Take Photo/Video',
-        onPress: handleCameraCapture,
-      },
-      {
-        text: 'Choose from Library',
-        onPress: () => handleImagePicker('library'),
-      },
-      {
-        text: 'Pick Documents',
-        onPress: handleDocumentPicker,
-      },
-      {
-        text: 'Cancel',
-        style: 'cancel',
-      },
-    ]);
-  };
-
   return (
-    <TouchableOpacity
-      //onPress={showUploadOptions}
-      activeOpacity={0.9}
-      disabled={isLoading}
-      className="rounded-xl border-2 border-dashed border-border bg-background p-6">
+    <View className="rounded-xl border-2 border-dashed border-border bg-background p-6">
       <View className="items-center space-y-3">
         <View className="h-12 w-12 items-center justify-center rounded-full bg-muted">
           <MaterialIcons
@@ -230,6 +205,6 @@ export function FileUpload({ onFileUpload }: FileUploadProps) {
           </TouchableOpacity>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
