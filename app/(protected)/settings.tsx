@@ -12,6 +12,17 @@ export default function SettingsScreen() {
   const [autoLockEnabled, setAutoLockEnabled] = useState(true);
   const { logout, setPassword } = useAuthState();
 
+  const handleBiometricToggle = (value: boolean) => {
+    if (value) {
+      Alert.alert(
+        'Coming Soon',
+        'Biometric authentication will be available in a future update. Stay tuned!',
+        [{ text: 'OK', style: 'default' }]
+      );
+    }
+    // Don't actually change the state - keep it disabled
+  };
+
   const handleLogout = async () => {
     try {
       logout();
@@ -69,7 +80,7 @@ export default function SettingsScreen() {
       icon: 'fingerprint',
       type: 'switch' as const,
       value: biometricEnabled,
-      onValueChange: setBiometricEnabled,
+      onValueChange: handleBiometricToggle,
     },
     {
       title: 'Auto Lock',

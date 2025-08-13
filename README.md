@@ -19,6 +19,15 @@ A secure photo and file vault application built with Expo 53, React Native, and 
 - **Categories**: Organize files by type (images, videos, audio, documents)
 - **Storage Monitoring**: Track vault storage usage and file counts
 
+## Screenshots
+
+<div align="center">
+  <img src="photo-vlt/Simulator-Screenshot---iPhone-15-Pro-Max---2025-08-13-at-05.26.56.png" width="200" alt="App Screenshot 1" />
+  <img src="photo-vlt/Simulator-Screenshot---iPhone-15-Pro-Max---2025-08-13-at-05.27.40.png" width="200" alt="App Screenshot 2" />
+  <img src="photo-vlt/Simulator-Screenshot---iPhone-15-Pro-Max---2025-08-13-at-05.28.40.png" width="200" alt="App Screenshot 3" />
+  <img src="photo-vlt/Simulator-Screenshot---iPhone-15-Pro-Max---2025-08-13-at-05.29.19.png" width="200" alt="App Screenshot 4" />
+</div>
+
 ## Tech Stack
 
 - **Expo 53**: Latest Expo SDK with enhanced performance
